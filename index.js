@@ -15,7 +15,8 @@ const connectDB = require('./db');
 const product = require('./productRoute');
 const shoeType = require('./shoeRoute');
 const user = require('./userRoute');
-
+const checkoutRoute = require('./checkoutRoute');
+        
 connectDB();
 
 // Create a route that sends a response when visiting the homepage
@@ -23,6 +24,7 @@ connectDB();
 app.use('/products', product);
 app.use('/spotlight', shoeType);
 app.use('/user', user);
+app.use('/payment', checkoutRoute);  
 
 app.get('/', (req, res) => {
     res.send('<h1>Hello, Shoe Server!</h1>');
