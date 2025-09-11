@@ -12,8 +12,9 @@ app.use(cors({
 app.use(express.json());
 require("dotenv").config();
 const connectDB = require('./db');
-const product = require('./productRoutes');
-const shoeType = require('./shoeRoutes');
+const product = require('./productRoute');
+const shoeType = require('./shoeRoute');
+const user = require('./userRoute');
 
 connectDB();
 
@@ -21,6 +22,7 @@ connectDB();
 
 app.use('/products', product);
 app.use('/spotlight', shoeType);
+app.use('/user', user);
 
 app.get('/', (req, res) => {
     res.send('<h1>Hello, Shoe Server!</h1>');
