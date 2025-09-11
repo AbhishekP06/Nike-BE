@@ -52,7 +52,7 @@ router.post('/create-checkout-session', async (req, res) => {
     }
 });
 
-app.get("/session/:id", async (req, res) => {
+router.get("/session/:id", async (req, res) => {
     try {
         const { id } = req.params;
         const session = await stripe.checkout.sessions.retrieve(id, {
