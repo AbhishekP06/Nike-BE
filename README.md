@@ -2,6 +2,8 @@
 
 A simple Express + MongoDB backend for a Nike-like store. Provides product, spotlight, user auth, and Stripe checkout endpoints.
 
+Live: https://nike-fe-bice.vercel.app/
+
 ### Tech Stack
 - **Runtime**: Node.js (CommonJS)
 - **Framework**: Express
