@@ -4,7 +4,7 @@ const router = express.Router();
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const FRONTEND_URL = process.env.FRONTEND_URL;
 
-router.post('/create-checkout-session', authMiddleware, async (req, res) => {
+router.post('/create-checkout-session', async (req, res) => {
     try {
         const { items = [], currency = "inr", shipping } = req.body;
 
@@ -53,7 +53,7 @@ router.post('/create-checkout-session', authMiddleware, async (req, res) => {
     }
 });
 
-router.get("/session/:id", authMiddleware, async (req, res) => {
+router.get("/session/:id", async (req, res) => {
     try {
         const { id } = req.params;
         const session = await stripe.checkout.sessions.retrieve(id, {
