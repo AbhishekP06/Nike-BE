@@ -55,31 +55,14 @@ router.post('/create-checkout-session', async (req, res) => {
 
 router.get("/session/:id", async (req, res) => {
     try {
-        console.log('Session retrieval request for ID:', req.params.id);
-        console.log('Stripe key exists:', !!process.env.STRIPE_SECRET_KEY);
-        
         const { id } = req.params;
-        
-        if (!process.env.STRIPE_SECRET_KEY) {
-            console.error('STRIPE_SECRET_KEY is missing');
-            return res.status(500).json({ 
-                error: 'Server configuration error',
-                message: 'Stripe not configured'
-            });
-        }
-        
         const session = await stripe.checkout.sessions.retrieve(id, {
             expand: ["line_items", "payment_intent"],
         });
-        
-        console.log('Session retrieved successfully');
         return res.json({ session });
     } catch (e) {
-        console.error('Session retrieval error:', e.message);
-        return res.status(400).json({ 
-            error: 'Unable to retrieve session',
-            message: e.message || "Session not found"
-        });
+        console.error(e);
+        return res.status(400).send(e?.message || "Unable to retrieve session");
     }
 });
 
